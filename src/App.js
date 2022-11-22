@@ -28,7 +28,10 @@ console.log(setContacts)
       <main>
         <Routes>
           {/* TODO: Add routes here  */}
-      <Route path='/addingContacts' element={<ContactsAdd contacts={contacts} setContacts={setContacts} />} />
+          <Route path='/addingContacts' element={<ContactsAdd contacts={contacts} setContacts={setContacts} />} />
+          <Route path='/contacts/:id' element={<ContactsView />}/>
+          <Route path='/' element={<ContactsList contacts={contacts} />} />
+
         </Routes>
       </main>
     </>

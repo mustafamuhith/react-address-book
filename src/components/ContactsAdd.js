@@ -1,12 +1,7 @@
 import { useState } from "react"
 import { useNavigate } from "react-router-dom";
 
-const initialState = {
-  firstName: '',
-  lastName: '',
-  street: '',
-  city:'',
-}
+
 
 function ContactsAdd(props) {
 
@@ -14,17 +9,31 @@ function ContactsAdd(props) {
   // to this component so new contacts can be added to the
   // state
   const { setContacts, contacts } = props
+  const navigate = useNavigate()
+  const initialState = {
+    firstName: '',
+    lastName: '',
+    street: '',
+    city:'',
+  }
 
   const [addedContact, setAddedContact] = useState(initialState)
-
   //TODO: Implement controlled form
   //send POST to json server on form submit
 
   const handleSubmit = (event) => {
-    event.preventDefault()
-    fetch('http://localhost:4000/contacts')
-    .then((res) => res.json())
-    .then((data) => setContacts([...contacts, data]))
+    event.preventDefault();
+    fetch("http://localhost:4000/contacts", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+
+      body: JSON.stringify(contact),
+    })
+      .then((res) => res.json())
+      .then((data) => setContacts([...contacts, data]));
+    event.target.reset();
     setContacts(initialState)
   }
 
@@ -46,7 +55,6 @@ function ContactsAdd(props) {
     }
   }
   console.log(addedContact)
-  
   return (
     <form className="form-stack contact-form" onSubmit={handleSubmit}>
       <h2>Create Contact</h2>
