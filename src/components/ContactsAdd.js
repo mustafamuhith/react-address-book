@@ -23,13 +23,13 @@ function ContactsAdd(props) {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    fetch("http://localhost:4000/contacts", {
+    fetch("http://localhost:4000/contacts",{
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
 
-      body: JSON.stringify(contact),
+      body: JSON.stringify(addedContact),
     })
       .then((res) => res.json())
       .then((data) => setContacts([...contacts, data]));
@@ -39,7 +39,7 @@ function ContactsAdd(props) {
 
   const handleChange = (event) => {
     const targetName = event.target.name
-    const targetValue = event.target.targetValue
+    const targetValue = event.target.value
 
     if(targetName === 'firstName') {
       setAddedContact({...addedContact, firstName: targetValue})

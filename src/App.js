@@ -6,9 +6,9 @@ import ContactsView from "./components/ContactsView"
 import "./styles/styles.css"
 
 export default function App() {
-  const [contacts, setContacts] = useState([])
   
   //TODO: Load all contacts on useEffect when component first renders
+    const [contacts, setContacts] = useState([])
 useEffect(() => {
   fetch('http://localhost:4000/contacts')
   .then((res) => res.json())
@@ -28,8 +28,9 @@ console.log(setContacts)
       <main>
         <Routes>
           {/* TODO: Add routes here  */}
-          <Route path='/addingContacts' element={<ContactsAdd contacts={contacts} setContacts={setContacts} />} />
           <Route path='/contacts/:id' element={<ContactsView />}/>
+          <Route path='/addingContacts' element={<ContactsAdd contacts={contacts} setContacts={setContacts} />} />
+          
           <Route path='/' element={<ContactsList contacts={contacts} />} />
 
         </Routes>
